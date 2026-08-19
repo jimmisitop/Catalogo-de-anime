@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/client/react";
-import { GET_ANIME_SCORE } from "../graphql/animeScore";
+import { GET_ANIME_AIRING } from "../graphql/animeAiring";
 import { loadingArray } from "../utils/constants/utilSkeletonCard";
 import AnimeCard from "./AnimeCard";
 
-export default function AnimeScore() {
-  const { loading, error, data } = useQuery(GET_ANIME_SCORE, {
+export default function AnimeAiring() {
+  const { loading, error, data } = useQuery(GET_ANIME_AIRING, {
     variables: { page: 1, perPage: 15 },
   });
 
@@ -24,7 +24,7 @@ export default function AnimeScore() {
       <div className="flex justify-between items-end mb-6">
         <h2 className="text-headline-md font-headline font-semibold text-on-surface flex items-center gap-3">
           <span className="w-1.5 h-6 bg-primary rounded-full" />
-          Mejor valorados
+          En emisión ahora
         </h2>
       </div>
 

@@ -1,10 +1,287 @@
 @import "tailwindcss";
-@layer utilities {
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+
+/* ── Material Design 3 Theme (Tailwind CSS v4) ── */
+/* Colors reference runtime CSS variables (--md-*) so they can be swapped
+   between light (:root) and dark (.dark) without rebuilding Tailwind. */
+@theme {
+  /* Background & Surfaces */
+  --color-background: var(--md-background);
+  --color-surface: var(--md-surface);
+  --color-surface-dim: var(--md-surface-dim);
+  --color-surface-bright: var(--md-surface-bright);
+  --color-surface-container-lowest: var(--md-surface-container-lowest);
+  --color-surface-container-low: var(--md-surface-container-low);
+  --color-surface-container: var(--md-surface-container);
+  --color-surface-container-high: var(--md-surface-container-high);
+  --color-surface-container-highest: var(--md-surface-container-highest);
+  --color-surface-variant: var(--md-surface-variant);
+
+  /* Primary (Orange / Amber) */
+  --color-primary: var(--md-primary);
+  --color-primary-container: var(--md-primary-container);
+  --color-on-primary: var(--md-on-primary);
+  --color-on-primary-container: var(--md-on-primary-container);
+  --color-primary-fixed: var(--md-primary-fixed);
+  --color-primary-fixed-dim: var(--md-primary-fixed-dim);
+  --color-inverse-primary: var(--md-inverse-primary);
+
+  /* On-colors (text on surfaces) */
+  --color-on-surface: var(--md-on-surface);
+  --color-on-surface-variant: var(--md-on-surface-variant);
+  --color-on-background: var(--md-on-background);
+
+  /* Secondary */
+  --color-secondary: var(--md-secondary);
+  --color-secondary-container: var(--md-secondary-container);
+  --color-on-secondary: var(--md-on-secondary);
+  --color-on-secondary-container: var(--md-on-secondary-container);
+
+  /* Tertiary */
+  --color-tertiary: var(--md-tertiary);
+  --color-tertiary-container: var(--md-tertiary-container);
+  --color-on-tertiary: var(--md-on-tertiary);
+  --color-on-tertiary-container: var(--md-on-tertiary-container);
+
+  /* Error */
+  --color-error: var(--md-error);
+  --color-error-container: var(--md-error-container);
+  --color-on-error: var(--md-on-error);
+  --color-on-error-container: var(--md-on-error-container);
+
+  /* Outline */
+  --color-outline: var(--md-outline);
+  --color-outline-variant: var(--md-outline-variant);
+
+  /* Inverse */
+  --color-inverse-surface: var(--md-inverse-surface);
+  --color-inverse-on-surface: var(--md-inverse-on-surface);
+
+  /* Font families */
+  --font-headline: "Montserrat", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* Font sizes */
+  --text-display-lg: 48px;
+  --text-headline-lg: 32px;
+  --text-headline-md: 24px;
+  --text-body-lg: 18px;
+  --text-body-md: 16px;
+  --text-label-md: 14px;
+  --text-caption: 12px;
+
+  /* Spacing */
+  /* NOTE: do not add xs/sm/md/lg/xl/2xl keys here — they collide with
+     Tailwind's built-in scale (max-w-*, text-*, rounded-*, etc.) and silently
+     override them. Use the core numeric spacing scale (p-4, mt-12...) instead. */
+  --spacing-margin-mobile: 16px;
+  --spacing-margin-desktop: 48px;
+  --spacing-gutter: 20px;
+
+  /* Border radius */
+  --radius-card: 12px;
+  --radius-button: 8px;
+}
+
+/* ── Light Theme (default) ── */
+:root {
+  --md-background: #fff8f6;
+  --md-surface: #fff8f6;
+  --md-surface-dim: #e7d7d0;
+  --md-surface-bright: #fff8f6;
+  --md-surface-container-lowest: #ffffff;
+  --md-surface-container-low: #fff1ec;
+  --md-surface-container: #fbebe4;
+  --md-surface-container-high: #f5e5de;
+  --md-surface-container-highest: #f0dfd8;
+  --md-surface-variant: #f0dfd8;
+
+  --md-primary: #9d4400;
+  --md-primary-container: #ffdbca;
+  --md-on-primary: #ffffff;
+  --md-on-primary-container: #341100;
+  --md-primary-fixed: #ffdbca;
+  --md-primary-fixed-dim: #ffb690;
+  --md-inverse-primary: #ffb690;
+
+  --md-on-surface: #201a17;
+  --md-on-surface-variant: #53433c;
+  --md-on-background: #201a17;
+
+  --md-secondary: #77574d;
+  --md-secondary-container: #ffdbca;
+  --md-on-secondary: #ffffff;
+  --md-on-secondary-container: #2c1600;
+
+  --md-tertiary: #665e30;
+  --md-tertiary-container: #ede18b;
+  --md-on-tertiary: #ffffff;
+  --md-on-tertiary-container: #1f1c02;
+
+  --md-error: #ba1a1a;
+  --md-error-container: #ffdad6;
+  --md-on-error: #ffffff;
+  --md-on-error-container: #410002;
+
+  --md-outline: #85736b;
+  --md-outline-variant: #d8c2b8;
+
+  --md-inverse-surface: #362f2c;
+  --md-inverse-on-surface: #fbeee9;
+
+  --md-glass-bg: rgba(255, 255, 255, 0.6);
+  --md-hairline: rgba(32, 26, 23, 0.08);
+}
+
+/* ── Dark Theme ── */
+.dark {
+  --md-background: #0c0f0f;
+  --md-surface: #121414;
+  --md-surface-dim: #121414;
+  --md-surface-bright: #37393a;
+  --md-surface-container-lowest: #0c0f0f;
+  --md-surface-container-low: #1a1c1c;
+  --md-surface-container: #1e2020;
+  --md-surface-container-high: #282a2b;
+  --md-surface-container-highest: #333535;
+  --md-surface-variant: #333535;
+
+  --md-primary: #ffb690;
+  --md-primary-container: #f47521;
+  --md-on-primary: #542100;
+  --md-on-primary-container: #562200;
+  --md-primary-fixed: #ffdbca;
+  --md-primary-fixed-dim: #ffb690;
+  --md-inverse-primary: #9d4400;
+
+  --md-on-surface: #e2e2e2;
+  --md-on-surface-variant: #dfc0b2;
+  --md-on-background: #e2e2e2;
+
+  --md-secondary: #c7c6cb;
+  --md-secondary-container: #46464b;
+  --md-on-secondary: #2f3035;
+  --md-on-secondary-container: #b5b4ba;
+
+  --md-tertiary: #c5c6ce;
+  --md-tertiary-container: #9899a1;
+  --md-on-tertiary: #2e3036;
+  --md-on-tertiary-container: #2f3138;
+
+  --md-error: #ffb4ab;
+  --md-error-container: #93000a;
+  --md-on-error: #690005;
+  --md-on-error-container: #ffdad6;
+
+  --md-outline: #a68b7e;
+  --md-outline-variant: #584237;
+
+  --md-inverse-surface: #e2e2e2;
+  --md-inverse-on-surface: #2f3131;
+
+  --md-glass-bg: rgba(35, 37, 43, 0.6);
+  --md-hairline: rgba(255, 255, 255, 0.05);
+}
+
+/* ── Base Styles ── */
+/* Tailwind's Preflight (in @layer base) already resets margin/padding/box-sizing.
+   Do NOT redeclare that here unlayered — unlayered CSS always beats @layer
+   utilities in the cascade, which would silently cancel every p-*/m-* class. */
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+/* ── Material Symbols ── */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Glass Panel ── */
+.glass-panel {
+  background: var(--md-glass-bg);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--md-hairline);
+}
+
+/* ── Hide Scrollbar ── */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Alias for backwards compat with existing no-scrollbar class */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ── Line Clamp ── */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* ── Animations ── */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+@keyframes slide-in-left {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-shimmer {
+  background: linear-gradient(90deg, var(--color-surface-container-high) 25%, var(--color-surface-container-highest) 50%, var(--color-surface-container-high) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }
