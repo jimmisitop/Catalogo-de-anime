@@ -8,20 +8,20 @@ Catálogo de anime con información de [AniList](https://anilist.co/). Permite e
 - **Estilos:** Tailwind CSS 4
 - **API:** GraphQL (AniList) via Apollo Client 4
 - **Auth & DB:** Supabase (email/password + PostgreSQL)
-- **Despliegue:** Cloudflare Pages
+- **Despliegue:** Vercel
 
 ## 📦 Instalación
 
 ```bash
 # Clonar el repositorio
-git clone <url-del-repo>
+git clone https://github.com/jimmisitop/Catalogo-de-anime.git
 cd animeCatalog
 
 # Instalar dependencias
 npm install
 
 # Configurar variables de entorno
-cp .env.example .env
+cp .env
 # Editar .env con tus credenciales de Supabase
 
 # Iniciar servidor de desarrollo
@@ -30,14 +30,12 @@ npm run dev
 
 ## 🔑 Variables de entorno
 
-Crea un archivo `.env` basado en `.env.example`:
+Crea un archivo `.env`:
 
 ```env
 VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
 VITE_SUPABASE_ANON_KEY=tu-anon-key-aqui
 ```
-
-> ⚠️ Nunca commitees el archivo `.env`. Solo se necesitan `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` (la `service_role key` nunca va en el cliente).
 
 ## 📜 Scripts disponibles
 
