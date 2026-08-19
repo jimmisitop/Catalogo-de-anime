@@ -13,6 +13,8 @@ export const GET_ANIME_SCORE = gql`
           english
           native
         }
+        averageScore
+        format
       }
     }
   }

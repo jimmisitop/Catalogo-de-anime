@@ -13,6 +13,8 @@ export const GET_ANIME_TRENDS = gql`
           english
           native
         }
+        averageScore
+        format
       }
     }
   }

@@ -11,6 +11,12 @@ export const GET_ANIME_NOVEDADES = gql`
           english
           native
         }
+        description
+        meanScore
+        episodes
+        coverImage {
+          large
+        }
       }
     }
   }

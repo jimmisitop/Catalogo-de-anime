@@ -1,11 +1,13 @@
 import { useQuery } from "@apollo/client/react";
-import { GET_ANIME_SCORE } from "../graphql/animeScore";
+import { GET_ANIME_SEASON } from "../graphql/animeSeason";
 import { loadingArray } from "../utils/constants/utilSkeletonCard";
+import { getCurrentSeason, seasonLabels } from "../utils/constants/utilSeason";
 import AnimeCard from "./AnimeCard";
 
-export default function AnimeScore() {
-  const { loading, error, data } = useQuery(GET_ANIME_SCORE, {
-    variables: { page: 1, perPage: 15 },
+export default function AnimeSeason() {
+  const { season, year } = getCurrentSeason();
+  const { loading, error, data } = useQuery(GET_ANIME_SEASON, {
+    variables: { page: 1, perPage: 15, season, seasonYear: year },
   });
 
   if (error) {
@@ -24,7 +26,7 @@ export default function AnimeScore() {
       <div className="flex justify-between items-end mb-6">
         <h2 className="text-headline-md font-headline font-semibold text-on-surface flex items-center gap-3">
           <span className="w-1.5 h-6 bg-primary rounded-full" />
-          Mejor valorados
+          Populares de {seasonLabels[season]} {year}
         </h2>
       </div>
 

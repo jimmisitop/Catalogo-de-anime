@@ -13,8 +13,9 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
+library.add(far);
+
 export default function SearchBar() {
-  library.add(far);
   const [search, setSearch] = useState("");
   const [menuAbierto, setMenuAbierto] = useState(true);
   const [input, setInput] = useState(false);
@@ -24,7 +25,7 @@ export default function SearchBar() {
   });
 
   return (
-    <div className="no-scrollbar max-h-15 sticky top-0 z-100 bg-white">
+    <div className="no-scrollbar max-h-15 sticky top-0 z-100 bg-white dark:bg-gray-900">
       <Navbar menuAbierto={menuAbierto} setMenuAbierto={setMenuAbierto} />
       <div className="flex justify-between max-w-[100vw] no-scrollbar">
         <div className="flex">
@@ -52,7 +53,7 @@ export default function SearchBar() {
         </div>
         <form className="z-9 relative flex items-center">
           <input
-            className={`rounded-lg h-10 transition-all duration-500 ease-in-out md:block ${
+            className={`rounded-lg h-10 transition-all duration-500 ease-in-out md:block bg-gray-100 dark:bg-gray-800 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${
               input ? "block z-10 shadow-2xl w-66 opacity-100 pl-5" : "hidden"
             }`}
             value={search}
@@ -72,12 +73,12 @@ export default function SearchBar() {
           {loading && <p>Cargando...</p>}
           {error && <p>Error: {error.message}</p>}
 
-          <div className="w-80 z-10 shadow-xl absolute top-15 bg-[#FEFEFE]">
+          <div className="w-80 z-10 shadow-xl absolute top-15 bg-[#FEFEFE] dark:bg-gray-800">
             {data &&
               data.Page.media.map((anime) => (
                 <div
                   key={anime.id}
-                  className="p-2 hover:bg-[#ececec] active:bg-[#ececec]"
+                  className="p-2 hover:bg-[#ececec] dark:hover:bg-gray-700 active:bg-[#ececec]"
                 >
                   <Link to={`/anime/${anime.id}`} className="flex">
                     <img
